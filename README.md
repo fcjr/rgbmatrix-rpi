@@ -12,28 +12,11 @@ To learn about the configuration and the wiring go to the [original library](htt
 Installation
 ------------
 
-The recommended way to install `rgbmatrix-rpi` is:
-
 ```sh
 go get github.com/fcjr/rgbmatrix-rpi
 ```
 
-Then you will get an **expected** error like this:
-
-```
-# github.com/fcjr/rgbmatrix-rpi
-/usr/bin/ld: cannot find -lrgbmatrix
-collect2: error: ld returned 1 exit status
-```
-
-This happens because you need to compile the `rgbmatrix` C bindings:
-```sh
-cd $GOPATH/src/github.com/fcjr/rgbmatrix-rpi/lib/rpi-rgb-led-matrix/
-git submodule update --init
-make
-cd $GOPATH/src/github.com/fcjr/rgbmatrix-rpi/
-go install -v ./...
-```
+The C++ sources are vendored and compiled automatically by CGO.
 
 Examples
 --------

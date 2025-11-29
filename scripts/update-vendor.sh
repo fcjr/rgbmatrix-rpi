@@ -19,10 +19,19 @@ echo "Removing old vendored files..."
 rm -rf "$VENDOR_DIR"
 mkdir -p "$VENDOR_DIR"
 
-echo "Copying new files..."
+# Remove old source files from package root
+rm -f "$REPO_ROOT"/*.cc "$REPO_ROOT"/hardware-mapping.c
+rm -f "$REPO_ROOT"/framebuffer-internal.h "$REPO_ROOT"/gpio-bits.h "$REPO_ROOT"/gpio.h
+rm -f "$REPO_ROOT"/hardware-mapping.h "$REPO_ROOT"/multiplex-mappers-internal.h "$REPO_ROOT"/utf8-internal.h
+
+echo "Copying include files..."
 cp -r "$TMP_DIR/include" "$VENDOR_DIR/"
-cp -r "$TMP_DIR/lib" "$VENDOR_DIR/"
 cp "$TMP_DIR/COPYING" "$VENDOR_DIR/"
+
+echo "Copying source files to package root..."
+cp "$TMP_DIR"/lib/*.cc "$REPO_ROOT/"
+cp "$TMP_DIR"/lib/*.c "$REPO_ROOT/"
+cp "$TMP_DIR"/lib/*.h "$REPO_ROOT/"
 
 echo "Done! Vendored files updated from upstream."
 echo "Don't forget to commit the changes."

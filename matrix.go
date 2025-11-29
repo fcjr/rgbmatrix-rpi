@@ -2,7 +2,9 @@ package rgbmatrix
 
 /*
 #cgo CFLAGS: -std=c99 -I${SRCDIR}/lib/rpi-rgb-led-matrix/include -DSHOW_REFRESH_RATE
-#cgo LDFLAGS: -lrgbmatrix -L${SRCDIR}/lib/rpi-rgb-led-matrix/lib -lstdc++ -lm
+#cgo CXXFLAGS: -std=c++11 -I${SRCDIR}/lib/rpi-rgb-led-matrix/include -DSHOW_REFRESH_RATE
+#cgo LDFLAGS: -lstdc++ -lm -lpthread
+#cgo linux LDFLAGS: -lrt
 #include <led-matrix-c.h>
 
 void led_matrix_swap(struct RGBLedMatrix *matrix, struct LedCanvas *offscreen_canvas,
